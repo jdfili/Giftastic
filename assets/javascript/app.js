@@ -1,8 +1,7 @@
 $(document).ready(function () {
 
     var topics = ["basketball", "football", "soccer", "mma", "hockey"]
-    localStorage.getItem("topics");
-
+ 
     function renderButtons() {
         for (var i = 0; i < topics.length; i++) {
             var button = $("<button>");
