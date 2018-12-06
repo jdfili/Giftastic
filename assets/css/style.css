@@ -1,7 +1,15 @@
 button {
-    margin-right: 5px;
+    margin: 5px;
 }
 
 img {
-    
+    margin: 2px;
+}
+span {
+  float: left;
+}
+p {
+    position: relative;
+    text-align: center;
+    margin: 0;
 }
