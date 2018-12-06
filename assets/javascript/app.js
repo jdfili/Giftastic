@@ -4,7 +4,6 @@ $(document).ready(function () {
     localStorage.getItem("topics");
 
     function renderButtons() {
-        console.log(localStorage.getItem("topics"));
         for (var i = 0; i < topics.length; i++) {
             var button = $("<button>");
             button.addClass("btn btn-primary topic");
@@ -17,9 +16,6 @@ $(document).ready(function () {
         $(".buttons").empty();
         event.preventDefault();
         topics.push($("#add-topic").val().trim());
-        localStorage.clear();
-        localStorage.setItem("topics", topics);
-        stored = true;
         renderButtons();
     })
 
