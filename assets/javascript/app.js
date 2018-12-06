@@ -40,21 +40,19 @@ $(document).ready(function () {
                 item.prepend(rating);
                 $(".display").prepend(item);
             }
+            $(".giphy").on("click", function () {
+                var state = $(this).attr("data-state");
+                console.log($(this).attr("data-state"));
+                if (state === "still") {
+                    $(this).attr("src", $(this).attr("data-animate"));
+                    $(this).attr("data-state", "animate");
+                }
+                else if (state === "animate") {
+                    $(this).attr("src", $(this).attr("data-still"));
+                    $(this).attr("data-state", "still");
+                }
+            })
 
-        })
-        $(document).on("click", ".giphy", function () {
-            state = $(this).attr("data-state");
-            console.log($(this).attr("data-still"))
-            console.log($(this).attr("data-animate"));
-            console.log($(this).attr("data-state"));
-            if (state == "still") {
-                $(this).attr("src", $(this).attr("data-animate"));
-                $(this).attr("data-state", "animate");
-            }
-            else if (state == "animate") {
-                $(this).attr("src", $(this).attr("data-still"));
-                $(this).attr("data-state", "still");
-            }
         })
 
     });
