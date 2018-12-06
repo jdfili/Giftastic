@@ -20,7 +20,7 @@ $(document).ready(function () {
 
     $(document).on("click", ".topic", function () {
         $(".display").empty();
-        var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + $(this).text() + "&api_key=Ig97Ln5sSfkudRTNHGujt1BpG3WxVTSi&limit=10"
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + $(this).text() + "&api_key=Ig97Ln5sSfkudRTNHGujt1BpG3WxVTSi&limit=10"
         $.ajax({
             url: queryURL,
             method: "GET"
