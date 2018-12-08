@@ -19,6 +19,12 @@ $(document).ready(function () {
     })
 
     $(".edit").on("click", function () {
+        if (!$(".edit").hasClass("active")) {
+            $(".edit").addClass("active");
+        }
+        else if ($(".edit").hasClass("active")) {
+            $(".edit").removeClass("active")
+        }
         if (!$(".topic").hasClass("remove")) {
             $(".topic").removeClass("btn-primary");
             $(".topic").addClass("btn-danger");
@@ -32,42 +38,44 @@ $(document).ready(function () {
     })
 
     $(document).on("click", ".topic", function () {
-        $(".display").empty();
-        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + $(this).text() + "&api_key=Ig97Ln5sSfkudRTNHGujt1BpG3WxVTSi&limit=10"
-        $.ajax({
-            url: queryURL,
-            method: "GET"
-        }).then(function (response) {
-            var results = response.data;
-            for (var i = 0; i < results.length; i++) {
-                var item = $("<span>")
-                var giphy = $("<img>");
-                giphy.addClass("giphy");
-                giphy.addClass("rounded");
-                giphy.attr("src", results[i].images.fixed_height_still.url);
-                giphy.attr("data-state", "still");
-                giphy.attr("data-still", results[i].images.fixed_height_still.url);
-                giphy.attr("data-animate", results[i].images.fixed_height.url);
-                item.append(giphy);
-                var rating = $("<p>");
-                rating.text("Rating: " + results[i].rating);
-                item.prepend(rating);
-                $(".display").prepend(item);
-            }
+        if ($(".topic").hasClass("btn-primary")) {
+            $(".display").empty();
+            var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + $(this).text() + "&api_key=Ig97Ln5sSfkudRTNHGujt1BpG3WxVTSi&limit=10"
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            }).then(function (response) {
+                var results = response.data;
+                for (var i = 0; i < results.length; i++) {
+                    var item = $("<span>")
+                    var giphy = $("<img>");
+                    giphy.addClass("giphy");
+                    giphy.addClass("rounded");
+                    giphy.attr("src", results[i].images.fixed_height_still.url);
+                    giphy.attr("data-state", "still");
+                    giphy.attr("data-still", results[i].images.fixed_height_still.url);
+                    giphy.attr("data-animate", results[i].images.fixed_height.url);
+                    item.append(giphy);
+                    var rating = $("<p>");
+                    rating.text("Rating: " + results[i].rating);
+                    item.prepend(rating);
+                    $(".display").prepend(item);
+                }
 
-            $(".giphy").on("click", function () {
-                var state = $(this).attr("data-state");
-                if (state === "still") {
-                    $(this).attr("src", $(this).attr("data-animate"));
-                    $(this).attr("data-state", "animate");
-                }
-                else if (state === "animate") {
-                    $(this).attr("src", $(this).attr("data-still"));
-                    $(this).attr("data-state", "still");
-                }
+                $(".giphy").on("click", function () {
+                    var state = $(this).attr("data-state");
+                    if (state === "still") {
+                        $(this).attr("src", $(this).attr("data-animate"));
+                        $(this).attr("data-state", "animate");
+                    }
+                    else if (state === "animate") {
+                        $(this).attr("src", $(this).attr("data-still"));
+                        $(this).attr("data-state", "still");
+                    }
+                })
+
             })
-
-        })
+        }
 
         if ($(this).hasClass("remove")) {
             topics.splice($(this), 1);
