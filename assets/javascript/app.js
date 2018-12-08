@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     var topics = ["basketball", "football", "soccer", "mma", "hockey"]
- 
+
     function renderButtons() {
         for (var i = 0; i < topics.length; i++) {
             var button = $("<button>");
@@ -12,10 +12,23 @@ $(document).ready(function () {
     }
 
     $(".submit").on("click", function () {
-        $(".buttons").empty();
+        $(".topic").remove();
         event.preventDefault();
         topics.push($("#add-topic").val().trim());
         renderButtons();
+    })
+
+    $(".edit").on("click", function () {
+        if (!$(".topic").hasClass("remove")) {
+            $(".topic").removeClass("btn-primary");
+            $(".topic").addClass("btn-danger");
+            $(".topic").addClass("remove");
+        }
+        else if ($(".topic").hasClass("remove")) {
+            $(".topic").removeClass("btn-danger");
+            $(".topic").removeClass("remove");
+            $(".topic").addClass("btn-primary");
+        }
     })
 
     $(document).on("click", ".topic", function () {
@@ -30,6 +43,7 @@ $(document).ready(function () {
                 var item = $("<span>")
                 var giphy = $("<img>");
                 giphy.addClass("giphy");
+                giphy.addClass("rounded");
                 giphy.attr("src", results[i].images.fixed_height_still.url);
                 giphy.attr("data-state", "still");
                 giphy.attr("data-still", results[i].images.fixed_height_still.url);
@@ -40,9 +54,9 @@ $(document).ready(function () {
                 item.prepend(rating);
                 $(".display").prepend(item);
             }
+
             $(".giphy").on("click", function () {
                 var state = $(this).attr("data-state");
-                console.log($(this).attr("data-state"));
                 if (state === "still") {
                     $(this).attr("src", $(this).attr("data-animate"));
                     $(this).attr("data-state", "animate");
@@ -55,6 +69,10 @@ $(document).ready(function () {
 
         })
 
+        if ($(this).hasClass("remove")) {
+            topics.splice($(this), 1);
+            $(this).remove();
+        }
     });
 
     renderButtons();
