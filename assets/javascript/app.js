@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
     var topics = ["basketball", "football", "soccer", "mma", "hockey"]
+  
 
     function renderButtons() {
         for (var i = 0; i < topics.length; i++) {
@@ -59,7 +60,7 @@ $(document).ready(function () {
                     var rating = $("<p>");
                     rating.text("Rating: " + results[i].rating);
                     item.prepend(rating);
-                    $(".display").prepend(item);
+                    $(".display").append(item);
                 }
 
                 $(".giphy").on("click", function () {
