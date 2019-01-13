@@ -8,6 +8,9 @@ This web app uses ajax to get a response from the Giphy API using user-input. Th
  - Bootsrap https://getbootstrap.com/
  - Giphy API https://developers.giphy.com/
 
- # Author: 
+# Published version:
+ - https://jdfili.github.io/Giftastic/
+
+# Author: 
  
  - John Filiaga
